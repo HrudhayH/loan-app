@@ -25,10 +25,6 @@ router.post('/register', async (req, res) => {
 });
 
 // ── Public: Login (both admin & client) ────────────────────────────
-router.get('/login', (_, res) => {
-  res.status(405).json({ error: 'Login must be performed with POST /api/auth/login' });
-});
-
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;

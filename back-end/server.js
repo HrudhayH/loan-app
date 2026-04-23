@@ -28,8 +28,6 @@ app.use('/api/dashboard', require('./routes/dashboard'));
 app.use('/api/reports', require('./routes/reports'));
 
 // Health check
-app.get('/', (_, res) => res.send('Loan app backend is running'));
-app.get('/api', (_, res) => res.json({ status: 'ok' }));
 app.get('/api/health', (_, res) => res.json({ status: 'ok' }));
 
 // Error handler
