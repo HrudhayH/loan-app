@@ -32,14 +32,19 @@ export default function ReportsPage() {
 
   return (
     <Shell>
-      <div className="p-6 max-w-7xl mx-auto space-y-4">
-        <h1 className="text-xl font-semibold text-gray-900">Reports</h1>
+      <div className="p-6 max-w-7xl mx-auto space-y-6">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="text-3xl font-semibold text-slate-900">Reports</h1>
+            <p className="text-sm text-slate-500 mt-1">Generate EMI, payment, and overdue reports for quick review.</p>
+          </div>
+        </div>
 
-        {/* Tabs */}
+        <div className="flex flex-wrap gap-2">
         <div className="flex gap-2">
           {[{ key: 'emi', label: 'EMI Report' }, { key: 'payments', label: 'Payment Report' }, { key: 'overdue', label: 'Overdue Report' }].map(t => (
             <button key={t.key} onClick={() => fetchReport(t.key as Tab)}
-              className={`px-4 py-2 text-sm rounded-lg border transition ${tab === t.key ? 'bg-blue-50 border-blue-200 text-blue-700 font-medium' : 'border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
+              className={`px-4 py-2 text-sm rounded-2xl border transition ${tab === t.key ? 'bg-gradient-to-r from-blue-600 to-teal-500 text-white border-transparent shadow-lg' : 'border-slate-200 text-slate-700 hover:bg-slate-100'}`}>
               {t.label}
             </button>
           ))}
@@ -56,7 +61,7 @@ export default function ReportsPage() {
                 {['upcoming', 'paid', 'partially_paid', 'unpaid', 'overdue'].map(s => <option key={s} value={s}>{s.replace('_', ' ')}</option>)}
               </select>
             </div>
-            <button onClick={() => fetchReport('emi')} className="px-4 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">Generate</button>
+            <button onClick={() => fetchReport('emi')} className="px-4 py-1.5 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-teal-500 rounded-2xl shadow-lg hover:opacity-95 transition">Generate</button>
           </div>
         )}
         {tab === 'payments' && (
@@ -71,20 +76,21 @@ export default function ReportsPage() {
               <input type="date" value={filters.to} onChange={e => setFilters({ ...filters, to: e.target.value })}
                 className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg" />
             </div>
-            <button onClick={() => fetchReport('payments')} className="px-4 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">Generate</button>
+            <button onClick={() => fetchReport('payments')} className="px-4 py-1.5 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-teal-500 rounded-2xl shadow-lg hover:opacity-95 transition">Generate</button>
           </div>
         )}
         {tab === 'overdue' && !data && (
-          <button onClick={() => fetchReport('overdue')} className="px-4 py-1.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700">Generate Report</button>
+          <button onClick={() => fetchReport('overdue')} className="px-4 py-1.5 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-teal-500 rounded-2xl shadow-lg hover:opacity-95 transition">Generate Report</button>
         )}
+        </div>
 
         {/* Results */}
         {loading && <div className="py-12 text-center text-gray-400">Loading...</div>}
 
         {!loading && data && tab === 'emi' && Array.isArray(data) && (
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-            <div className="px-4 py-3 border-b border-gray-100 flex justify-between items-center">
-              <p className="text-sm font-medium text-gray-900">{data.length} EMI records</p>
+          <div className="bg-white/95 rounded-[28px] border border-slate-200 shadow-sm overflow-hidden">
+            <div className="px-5 py-4 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
+              <p className="text-sm font-semibold text-slate-900">{data.length} EMI records</p>
             </div>
             <table className="w-full text-sm">
               <thead>

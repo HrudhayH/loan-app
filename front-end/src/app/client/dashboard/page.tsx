@@ -27,30 +27,36 @@ export default function ClientDashboard() {
   return (
     <ClientShell>
       <div className="p-6 max-w-5xl mx-auto space-y-6">
-        <h1 className="text-xl font-semibold text-gray-900">My Dashboard</h1>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="text-3xl font-semibold text-slate-900">My Dashboard</h1>
+            <p className="text-sm text-slate-500 mt-1">Your active loans, upcoming EMIs, and recent payments at a glance.</p>
+          </div>
+        </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
           {cards.map(c => (
-            <div key={c.label} className="bg-white rounded-xl border border-gray-200 p-4">
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center mb-3 ${c.color}`}>
-                <c.icon size={16} />
+            <div key={c.label} className="bg-white/95 rounded-[28px] border border-slate-200 p-5 shadow-sm">
+              <div className={`w-11 h-11 rounded-2xl flex items-center justify-center mb-4 ${c.color}`}>
+                <c.icon size={18} />
               </div>
-              <p className="text-2xl font-semibold text-gray-900">{c.isCurrency ? c.value : c.value}</p>
-              <p className="text-xs text-gray-500 mt-0.5">{c.label}</p>
+              <p className="text-3xl font-semibold text-slate-900">{c.isCurrency ? c.value : c.value}</p>
+              <p className="text-xs uppercase tracking-[0.18em] text-slate-500 mt-2">{c.label}</p>
             </div>
           ))}
         </div>
 
         {s.totalOutstanding > 0 && (
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-            <p className="text-sm font-medium text-amber-800">Outstanding Balance: {formatCurrency(s.totalOutstanding)}</p>
+          <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-950 text-white rounded-[28px] border border-slate-800 p-6 shadow-lg">
+            <p className="text-sm uppercase tracking-[0.18em] text-slate-300">Outstanding Balance</p>
+            <p className="mt-3 text-3xl font-semibold">{formatCurrency(s.totalOutstanding)}</p>
           </div>
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-xl border border-gray-200">
-            <div className="px-4 py-3 border-b border-gray-100">
-              <h2 className="text-sm font-medium text-gray-900">Upcoming EMIs (7 days)</h2>
+          <div className="bg-white/95 rounded-[28px] border border-slate-200 shadow-sm overflow-hidden">
+            <div className="px-5 py-4 border-b border-slate-200 bg-slate-50">
+              <h2 className="text-sm font-semibold text-slate-900">Upcoming EMIs (7 days)</h2>
             </div>
             <div className="divide-y divide-gray-50">
               {(data?.upcomingEmis || []).length === 0 ? (
@@ -70,9 +76,9 @@ export default function ClientDashboard() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl border border-gray-200">
-            <div className="px-4 py-3 border-b border-gray-100">
-              <h2 className="text-sm font-medium text-gray-900">Recent Payments</h2>
+          <div className="bg-white/95 rounded-[28px] border border-slate-200 shadow-sm overflow-hidden">
+            <div className="px-5 py-4 border-b border-slate-200 bg-slate-50">
+              <h2 className="text-sm font-semibold text-slate-900">Recent Payments</h2>
             </div>
             <div className="divide-y divide-gray-50">
               {(data?.recentPayments || []).length === 0 ? (

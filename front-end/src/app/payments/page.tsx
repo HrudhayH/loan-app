@@ -19,15 +19,19 @@ export default function PaymentsPage() {
 
   return (
     <Shell>
-      <div className="p-6 max-w-7xl mx-auto space-y-4">
-        <h1 className="text-xl font-semibold text-gray-900">Payments</h1>
-        <p className="text-sm text-gray-500">{total} total payments recorded</p>
+      <div className="p-6 max-w-7xl mx-auto space-y-6">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="text-3xl font-semibold text-slate-900">Payments</h1>
+            <p className="text-sm text-slate-500 mt-1">{total} total payments recorded</p>
+          </div>
+        </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="bg-white/90 rounded-[28px] border border-slate-200 shadow-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100 text-left">
-                <th className="px-4 py-3 text-xs font-medium text-gray-500">Loan #</th>
+              <tr className="bg-slate-50 border-b border-slate-200 text-left">
+                <th className="px-4 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Loan #</th>
                 <th className="px-4 py-3 text-xs font-medium text-gray-500">EMI #</th>
                 <th className="px-4 py-3 text-xs font-medium text-gray-500">Amount</th>
                 <th className="px-4 py-3 text-xs font-medium text-gray-500">Mode</th>
@@ -42,8 +46,8 @@ export default function PaymentsPage() {
               ) : payments.length === 0 ? (
                 <tr><td colSpan={7} className="px-4 py-12 text-center text-gray-400">No payments recorded yet</td></tr>
               ) : payments.map(p => (
-                <tr key={p._id} className="hover:bg-gray-50/50">
-                  <td className="px-4 py-3 text-blue-600 font-medium">{p.loan?.loanNumber}</td>
+                <tr key={p._id} className="hover:bg-slate-100/70 transition">
+                  <td className="px-4 py-4 text-blue-600 font-medium">{p.loan?.loanNumber}</td>
                   <td className="px-4 py-3 text-gray-600">#{p.emi?.emiNumber}</td>
                   <td className="px-4 py-3 font-medium text-emerald-600">{formatCurrency(p.amount)}</td>
                   <td className="px-4 py-3 text-gray-600 capitalize">{p.paymentMode?.replace('_', ' ')}</td>

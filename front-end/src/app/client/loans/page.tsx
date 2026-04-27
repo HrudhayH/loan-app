@@ -16,22 +16,27 @@ export default function ClientLoansPage() {
 
   return (
     <ClientShell>
-      <div className="p-6 max-w-6xl mx-auto space-y-4">
-        <h1 className="text-xl font-semibold text-gray-900">My Loans</h1>
+      <div className="p-6 max-w-6xl mx-auto space-y-6">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="text-3xl font-semibold text-slate-900">My Loans</h1>
+            <p className="text-sm text-slate-500 mt-1">Review upcoming payments and loan status details for your account.</p>
+          </div>
+        </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="bg-white/95 rounded-[28px] border border-slate-200 shadow-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100 text-left">
-                <th className="px-4 py-3 text-xs font-medium text-gray-500">Loan #</th>
-                <th className="px-4 py-3 text-xs font-medium text-gray-500">Type</th>
-                <th className="px-4 py-3 text-xs font-medium text-gray-500">Amount</th>
-                <th className="px-4 py-3 text-xs font-medium text-gray-500">Outstanding</th>
-                <th className="px-4 py-3 text-xs font-medium text-gray-500">Status</th>
-                <th className="px-4 py-3 text-xs font-medium text-gray-500">Date</th>
+              <tr className="bg-slate-50 border-b border-slate-200 text-left">
+                <th className="px-4 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Loan #</th>
+                <th className="px-4 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Type</th>
+                <th className="px-4 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Amount</th>
+                <th className="px-4 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Outstanding</th>
+                <th className="px-4 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Status</th>
+                <th className="px-4 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Date</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-50">
+            <tbody className="divide-y divide-slate-100">
               {loading ? (
                 <tr><td colSpan={6} className="px-4 py-12 text-center text-gray-400">Loading...</td></tr>
               ) : loans.length === 0 ? (

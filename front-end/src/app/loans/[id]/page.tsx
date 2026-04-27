@@ -43,13 +43,13 @@ export default function LoanDetailPage() {
   return (
     <Shell>
       <div className="p-6 max-w-7xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex items-start justify-between">
+        <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
           <div>
-            <h1 className="text-xl font-semibold text-gray-900">{loan.loanNumber}</h1>
-            <p className="text-sm text-gray-500">{loan.client?.name} · {loanTypeLabels[loan.loanType] || loan.customLoanType}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">Loan details</p>
+            <h1 className="text-3xl font-semibold text-slate-900">{loan.loanNumber}</h1>
+            <p className="text-sm text-slate-500 mt-1">{loan.client?.name} · {loanTypeLabels[loan.loanType] || loan.customLoanType}</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {loan.status === 'pending_approval' && (
               <button onClick={() => updateStatus('active')} className="px-3 py-1.5 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition">Approve</button>
             )}
@@ -63,16 +63,14 @@ export default function LoanDetailPage() {
         </div>
 
         {/* Loan Info Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             { label: 'Status', value: loan.status.replace('_', ' '), badge: true },
             { label: 'Loan Amount', value: formatCurrency(loan.loanAmount) },
             { label: 'Interest', value: `${loan.interestRate}% (${loan.interestType})` },
-            { label: 'Tenure', value: `${loan.tenure} months` },
-            { label: 'Total Paid', value: formatCurrency(loan.totalPaid || 0) },
             { label: 'Outstanding', value: formatCurrency(loan.outstandingAmount) },
           ].map(item => (
-            <div key={item.label} className="bg-white rounded-xl border border-gray-200 p-4">
+            <div key={item.label} className="bg-white/95 rounded-3xl border border-slate-200 p-5 shadow-sm">
               <p className="text-xs text-gray-500">{item.label}</p>
               {item.badge ? (
                 <span className={`inline-block mt-1 px-2 py-0.5 text-xs font-medium rounded-full ${statusColors[loan.status] || 'bg-gray-100'}`}>{item.value}</span>
@@ -84,13 +82,13 @@ export default function LoanDetailPage() {
         </div>
 
         {/* EMI Schedule */}
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-          <div className="px-4 py-3 border-b border-gray-100">
-            <h2 className="text-sm font-medium text-gray-900">EMI Schedule</h2>
+        <div className="bg-white/95 rounded-[28px] border border-slate-200 shadow-sm overflow-hidden">
+          <div className="px-5 py-4 border-b border-slate-200 bg-slate-50">
+            <h2 className="text-sm font-semibold text-slate-900">EMI Schedule</h2>
           </div>
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100 text-left">
+              <tr className="bg-slate-50 border-b border-slate-200 text-left">
                 <th className="px-4 py-2.5 text-xs font-medium text-gray-500">#</th>
                 <th className="px-4 py-2.5 text-xs font-medium text-gray-500">Due Date</th>
                 <th className="px-4 py-2.5 text-xs font-medium text-gray-500">EMI</th>

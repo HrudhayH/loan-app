@@ -45,16 +45,19 @@ export default function FollowUpsPage() {
 
   return (
     <Shell>
-      <div className="p-6 max-w-7xl mx-auto space-y-4">
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl font-semibold text-gray-900">Follow-ups</h1>
+      <div className="p-6 max-w-7xl mx-auto space-y-6">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h1 className="text-3xl font-semibold text-slate-900">Follow-ups</h1>
+            <p className="text-sm text-slate-500 mt-1">Track reminders, overdue follow-ups, and payment commitments.</p>
+          </div>
           <button onClick={openForm}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-teal-500 rounded-2xl shadow-lg hover:opacity-95 transition">
             <Plus size={16} /> New Follow-up
           </button>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {['', 'pending', 'completed', 'cancelled'].map(s => (
             <button key={s} onClick={() => setStatusFilter(s)}
               className={`px-3 py-1.5 text-sm rounded-lg border transition ${statusFilter === s ? 'bg-blue-50 border-blue-200 text-blue-700 font-medium' : 'border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
@@ -63,10 +66,10 @@ export default function FollowUpsPage() {
           ))}
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="bg-white/95 rounded-[28px] border border-slate-200 shadow-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100 text-left">
+              <tr className="bg-slate-50 border-b border-slate-200 text-left">
                 <th className="px-4 py-3 text-xs font-medium text-gray-500">Client</th>
                 <th className="px-4 py-3 text-xs font-medium text-gray-500">Loan #</th>
                 <th className="px-4 py-3 text-xs font-medium text-gray-500">Type</th>
@@ -156,8 +159,8 @@ function FollowUpForm({ clients, onSave, onClose }: { clients: any[]; onSave: (d
               className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
           <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={onClose} className="px-4 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50">Cancel</button>
-            <button type="submit" disabled={saving} className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50">{saving ? 'Saving...' : 'Save'}</button>
+            <button type="button" onClick={onClose} className="px-4 py-2 text-sm border border-slate-200 rounded-2xl hover:bg-slate-50 transition">Cancel</button>
+            <button type="submit" disabled={saving} className="px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-teal-500 rounded-2xl shadow-lg hover:opacity-95 transition disabled:opacity-50">{saving ? 'Saving...' : 'Save'}</button>
           </div>
         </form>
       </div>

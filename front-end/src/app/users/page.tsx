@@ -24,20 +24,23 @@ export default function UsersPage() {
 
   return (
     <Shell>
-      <div className="p-6 max-w-7xl mx-auto space-y-4">
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl font-semibold text-gray-900">Users</h1>
+      <div className="p-6 max-w-7xl mx-auto space-y-6">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h1 className="text-3xl font-semibold text-slate-900">Users</h1>
+            <p className="text-sm text-slate-500 mt-1">Create and manage client login accounts from here.</p>
+          </div>
           <button onClick={() => setShowForm(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-teal-500 rounded-2xl shadow-lg hover:opacity-95 transition">
             <Plus size={16} /> Create Client Account
           </button>
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="bg-white/90 rounded-[28px] border border-slate-200 shadow-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100 text-left">
-                <th className="px-4 py-3 text-xs font-medium text-gray-500">Name</th>
+              <tr className="bg-slate-50 border-b border-slate-200 text-left">
+                <th className="px-4 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Name</th>
                 <th className="px-4 py-3 text-xs font-medium text-gray-500">Email</th>
                 <th className="px-4 py-3 text-xs font-medium text-gray-500">Role</th>
                 <th className="px-4 py-3 text-xs font-medium text-gray-500">Linked Client</th>
@@ -50,8 +53,8 @@ export default function UsersPage() {
               {loading ? (
                 <tr><td colSpan={7} className="px-4 py-12 text-center text-gray-400">Loading...</td></tr>
               ) : users.map(u => (
-                <tr key={u._id} className="hover:bg-gray-50/50">
-                  <td className="px-4 py-3 font-medium text-gray-800">{u.name}</td>
+                <tr key={u._id} className="hover:bg-slate-100/70 transition">
+                  <td className="px-4 py-4 font-semibold text-slate-900">{u.name}</td>
                   <td className="px-4 py-3 text-gray-600">{u.email}</td>
                   <td className="px-4 py-3">
                     <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${u.role === 'admin' ? 'bg-blue-100 text-blue-700' : 'bg-emerald-100 text-emerald-700'}`}>
@@ -159,8 +162,8 @@ function CreateClientForm({ onClose, onCreated }: { onClose: () => void; onCreat
           </div>
           {error && <p className="text-xs text-red-600">{error}</p>}
           <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={onClose} className="px-4 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 transition">Cancel</button>
-            <button type="submit" disabled={saving} className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition disabled:opacity-50">
+            <button type="button" onClick={onClose} className="px-4 py-2 text-sm border border-slate-200 rounded-2xl hover:bg-slate-50 transition">Cancel</button>
+            <button type="submit" disabled={saving} className="px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-teal-500 rounded-2xl shadow-lg hover:opacity-95 transition disabled:opacity-50">
               {saving ? 'Creating...' : 'Create Account'}
             </button>
           </div>

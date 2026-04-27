@@ -39,16 +39,18 @@ export default function LoansPage() {
   return (
     <Shell>
       <div className="p-6 max-w-7xl mx-auto space-y-4">
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl font-semibold text-gray-900">Loans</h1>
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h1 className="text-3xl font-semibold text-slate-900">Loans</h1>
+            <p className="text-sm text-slate-500 mt-1">Monitor and manage loan applications from a single dashboard.</p>
+          </div>
           <button onClick={openForm}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-teal-500 rounded-2xl shadow-lg hover:opacity-95 transition">
             <Plus size={16} /> New Loan
           </button>
         </div>
 
-        {/* Filters */}
-        <div className="flex gap-2">
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[1fr_auto]">
           <select value={statusFilter} onChange={e => { setStatusFilter(e.target.value); setPage(1); }}
             className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             <option value="">All Status</option>
@@ -64,11 +66,11 @@ export default function LoansPage() {
         </div>
 
         {/* Table */}
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="bg-white/90 rounded-[28px] border border-slate-200 shadow-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100 text-left">
-                <th className="px-4 py-3 text-xs font-medium text-gray-500">Loan #</th>
+              <tr className="bg-slate-50 border-b border-slate-200 text-left">
+                <th className="px-4 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Loan #</th>
                 <th className="px-4 py-3 text-xs font-medium text-gray-500">Client</th>
                 <th className="px-4 py-3 text-xs font-medium text-gray-500">Type</th>
                 <th className="px-4 py-3 text-xs font-medium text-gray-500">Amount</th>
@@ -85,9 +87,9 @@ export default function LoansPage() {
               ) : loans.length === 0 ? (
                 <tr><td colSpan={9} className="px-4 py-12 text-center text-gray-400">No loans found</td></tr>
               ) : loans.map(l => (
-                <tr key={l._id} className="hover:bg-gray-50/50">
-                  <td className="px-4 py-3">
-                    <Link href={`/loans/${l._id}`} className="text-blue-600 hover:underline font-medium">{l.loanNumber}</Link>
+                <tr key={l._id} className="hover:bg-slate-100/70 transition">
+                  <td className="px-4 py-4">
+                    <Link href={`/loans/${l._id}`} className="text-blue-600 hover:text-blue-700 font-medium">{l.loanNumber}</Link>
                   </td>
                   <td className="px-4 py-3 text-gray-800">{l.client?.name}</td>
                   <td className="px-4 py-3 text-gray-600">{loanTypeLabels[l.loanType] || l.customLoanType || l.loanType}</td>
@@ -254,8 +256,8 @@ function LoanForm({ clients, onSave, onClose }: { clients: any[]; onSave: (d: an
               className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
           <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={onClose} className="px-4 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 transition">Cancel</button>
-            <button type="submit" disabled={saving} className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition disabled:opacity-50">
+            <button type="button" onClick={onClose} className="px-4 py-2 text-sm border border-slate-200 rounded-2xl hover:bg-slate-50 transition">Cancel</button>
+            <button type="submit" disabled={saving} className="px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-teal-500 rounded-2xl shadow-lg hover:opacity-95 transition disabled:opacity-50">
               {saving ? 'Creating...' : 'Create Loan'}
             </button>
           </div>
